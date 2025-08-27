@@ -1,6 +1,55 @@
 {
-	"actorSpecification": 1,
-	"name": "instagram-comments-scraper",
-	"version": "1.0",
-	"buildTag": "latest"
+  "actorSpecification": 1,
+  "name": "instagram-comments-scraper",
+  "title": "Instagram Comments Scraper",
+  "version": "1.0.0",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "postUrl": { "type": "string", "title": "Post URL" },
+          "postId": { "type": "string", "title": "Post ID" },
+          "commentId": { "type": "string", "title": "Comment ID" },
+          "commentText": { "type": "string", "title": "Comment Text" },
+          "position": { "type": "integer", "title": "Position" },
+          "timestamp": { "type": "integer", "title": "Timestamp (Unix)" },
+          "ownerId": { "type": "string", "title": "Owner ID" },
+          "username": { "type": "string", "title": "Username" },
+          "profilePicUrl": { "type": "string", "title": "Profile Picture URL" },
+          "profileUrl": { "type": "string", "title": "Profile URL" }
+        },
+        "required": ["postUrl", "postId", "commentId", "commentText", "username", "timestamp"]
+      },
+      "views": {
+        "overview": {
+          "title": "Comments Overview",
+          "transformation": {
+            "fields": [
+              "postId",
+              "commentId",
+              "commentText",
+              "username",
+              "position",
+              "timestamp",
+              "profilePicUrl",
+              "profileUrl"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "commentText": { "label": "Comment", "format": "text" },
+              "profilePicUrl": { "label": "Avatar", "format": "image" },
+              "profileUrl": { "label": "Profile", "format": "link" },
+              "timestamp": { "label": "Time", "format": "date" },
+              "position": { "label": "Order", "format": "number" }
+            }
+          }
+        }
+      }
+    }
+  }
 }
