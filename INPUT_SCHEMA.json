@@ -1,0 +1,15 @@
+{
+  "title": "Instagram Comments Scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "postUrls": {
+      "title": "Instagram Post URLs",
+      "type": "array",
+      "description": "List of Instagram post URLs to scrape comments from.",
+      "editor": "stringList",
+      "prefill": ["https://www.instagram.com/p/POST_ID/"]
+    }
+  },
+  "required": ["postUrls"]
+}
