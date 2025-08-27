@@ -14,8 +14,6 @@ await Actor.main(async () => {
         throw new Error("No Instagram post URLs provided!");
     }
 
-    const results = [];
-
     for (const url of postUrls) {
         try {
             const postId = url.split("/p/")[1]?.split("/")[0];
@@ -30,32 +28,36 @@ await Actor.main(async () => {
             });
 
             if (!res.ok) {
-                console.log(` Failed to fetch ${url}`);
+                console.log(`❌ Failed to fetch ${url}`);
                 continue;
             }
 
             const data = await res.json();
 
             const comments = data?.graphql?.shortcode_media?.edge_media_to_parent_comment?.edges || [];
-            const extracted = comments.map((c, idx) => ({
-                position: idx + 1,
-                postId,
-                commentId: c.node.id,
-                text: c.node.text,
-                timestamp: c.node.created_at,
-                ownerId: c.node.owner.id,
-                username: c.node.owner.username,
-                profilePic: c.node.owner.profile_pic_url,
-                profileUrl: `https://instagram.com/${c.node.owner.username}`,
-            }));
 
-            results.push({ postUrl: url, comments: extracted });
+            for (let idx = 0; idx < comments.length; idx++) {
+                const c = comments[idx].node;
+
+                // Push each comment as a flat object
+                await Actor.pushData({
+                    postUrl: url,
+                    postId,
+                    commentId: c.id,
+                    commentText: c.text,
+                    position: idx + 1,
+                    timestamp: c.created_at,
+                    ownerId: c.owner.id,
+                    username: c.owner.username,
+                    profilePicUrl: c.owner.profile_pic_url,
+                    profileUrl: `https://instagram.com/${c.owner.username}`,
+                });
+            }
 
         } catch (err) {
-            console.log(` Error scraping ${url}:`, err.message);
+            console.log(`⚠️ Error scraping ${url}:`, err.message);
         }
     }
 
-    await Actor.pushData(results);
-    console.log(" Scraping completed!");
+    console.log("✅ Scraping completed!");
 });
