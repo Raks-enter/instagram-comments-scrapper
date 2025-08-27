@@ -1,0 +1,25 @@
+{
+  "name": "instagram-comments-scraper",
+  "title": "Instagram Comments Scraper",
+  "description": "Scrape comments from one or more Instagram posts including text, post IDs, position, timestamp, owner IDs, usernames, profile pics, and profile URLs.",
+  "version": "0.0.1",
+  "categories": ["Instagram", "Scraping", "Social Media"],
+  "tags": ["instagram", "comments", "scraper", "social media", "automation"],
+  "input": "./INPUT_SCHEMA.json",
+  "output": {
+    "schema": {
+      "type": "object",
+      "properties": {
+        "commentText": { "type": "string", "title": "Comment Text" },
+        "postId": { "type": "string", "title": "Post ID" },
+        "position": { "type": "integer", "title": "Comment Position" },
+        "timestamp": { "type": "string", "title": "Timestamp" },
+        "ownerId": { "type": "string", "title": "Owner ID" },
+        "username": { "type": "string", "title": "Username" },
+        "profilePicUrl": { "type": "string", "title": "Profile Picture URL" },
+        "profileUrl": { "type": "string", "title": "Profile URL" }
+      },
+      "required": ["commentText", "username", "timestamp"]
+    }
+  }
+}

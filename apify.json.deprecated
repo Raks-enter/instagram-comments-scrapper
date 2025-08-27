@@ -1,9 +1,0 @@
-{
-  "name": "instagram-comments-scraper",
-  "title": "Instagram Comments Scraper",
-  "description": "Scrape comments from Instagram posts.",
-  "version": "1.0",
-  "buildTag": "latest",
-  "input": "./INPUT_SCHEMA.json",
-  "actorSpecification": 1
-}
