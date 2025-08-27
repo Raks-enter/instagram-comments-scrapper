@@ -8,7 +8,7 @@
       "type": "array",
       "description": "List of Instagram post URLs to scrape comments from.",
       "editor": "stringList",
-      "prefill": ["https://www.instagram.com/p/POST_ID/"]
+      "prefill": ["https://www.instagram.com/p/DNEYQDvAaYh/?img_index=1"]
     }
   },
   "required": ["postUrls"]
